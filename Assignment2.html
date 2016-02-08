@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Assignment 2</title>
+        <style>
+            body {
+                margin: 0px;
+            }
+            h1 { 
+                background-color: black;
+                padding: 10px;
+                font-family: Arial;
+                font-size: 35px;
+            }
+            h2 {
+                color: black; 
+                font-family: Arial;
+                font-size: 25px; 
+            }
+            #log {
+                line-height: 140%;
+            }
+            #contents {
+                margin: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="color: white">Gapiminder - Wealth and Health of Nations</h1>
+        <div id="contents">
+            <h2>Countries</h2>
+            <div id="log">
+            </div>
+        </div>    
+    </body>
+    
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script>
+        var url = "https://raw.githubusercontent.com/CristianFelix/infoviz/master/gapminder.json";
+        var countryname
+
+        var viz = d3.select("#log");
+        
+        d3.json(url, function(error, result) {
+            countryname = result
+            render();
+        });
+        
+        
+        function render() {
+            var changes = viz.selectAll("div")
+                .data(countryname, function(d) {return d.name });
+            
+            changes.enter()
+                .append("div")
+                .text(function(d) {return d.name}); 
+        }
+                
+    </script>
+</html>
